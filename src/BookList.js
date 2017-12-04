@@ -1,11 +1,10 @@
-import React from 'react'
-import shelves from './util/Shelves'
+import React from 'react';
+import shelves from './util/Shelves';
+import Book from './Book';
 
-class BookList extends React.Component{
-
-
+class BookList extends React.Component
+{
     render(){
-
         return (
 
             <div className="list-books">
@@ -21,13 +20,7 @@ class BookList extends React.Component{
                                 {this.props.books
                                     .filter((book) => (book.shelf === shelf.slug))
                                     .map((book) => (
-                                        <li>
-                                            <div className="book">
-                                                <div className="book-title">
-                                                    {book.title}
-                                                </div>
-                                            </div>
-                                        </li>
+                                        <Book key={book.id} book={book} />
                                     )
                                 )}
                             </ol>
