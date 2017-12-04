@@ -14,10 +14,9 @@ class BookList extends React.Component{
                 title: 'Want to Read',
                 slug: 'wantToRead'
             },
-
             {
                 title: 'Read',
-                slug: 'Read'
+                slug: 'read'
             }];
 
         return (
@@ -28,11 +27,22 @@ class BookList extends React.Component{
                 </div>
 
                 {shelves.map((shelf) => (
-                    <div className="bookshelf">
+                    <div key={shelf.slug} className="bookshelf">
                         <h2 className="bookshelf-title">{shelf.title}</h2>
                         <div className="bookshelf-books">
                             <ol className="books-grid">
-
+                                {this.props.books
+                                    .filter((book) => (book.shelf === shelf.slug))
+                                    .map((book) => (
+                                        <li>
+                                            <div className="book">
+                                                <div className="book-title">
+                                                    {book.title}
+                                                </div>
+                                            </div>
+                                        </li>
+                                    )
+                                )}
                             </ol>
                         </div>
                     </div>
