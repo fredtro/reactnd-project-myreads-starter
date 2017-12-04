@@ -1,16 +1,28 @@
 import React from 'react'
-// import * as BooksAPI from './BooksAPI'
+import * as BooksAPI from './BooksAPI'
 import './App.css'
 import './BookList'
 import BookList from "./BookList"
 
 class BooksApp extends React.Component {
 
-  render() {
+    state = {
+        books: []
+    };
+
+    componentDidMount() {
+        BooksAPI.getAll().then((books) => {
+            this.setState({
+                books: books
+            });
+        })
+    }
+
+    render() {
       return(<div className="app">
-        <BookList/>
+        <BookList books={this.state.books}/>
       </div>)
-  }
+    }
 }
 
 export default BooksApp
