@@ -1,23 +1,10 @@
 import React from 'react'
+import shelves from './util/Shelves'
 
 class BookList extends React.Component{
 
 
     render(){
-
-        const shelves = [
-            {
-                title: 'Currently Reading',
-                slug: 'currentlyReading'
-            },
-            {
-                title: 'Want to Read',
-                slug: 'wantToRead'
-            },
-            {
-                title: 'Read',
-                slug: 'read'
-            }];
 
         return (
 
