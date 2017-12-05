@@ -5,7 +5,7 @@ class Book extends React.Component{
 
     render(){
 
-        const {book} = this.props;
+        const {book, shelves} = this.props;
 
         return(
             <li>
@@ -16,7 +16,18 @@ class Book extends React.Component{
                         backgroundImage: `url(${book.imageLinks.thumbnail})`
                     }}>
 
+                        <div className="book-shelf-changer">
+                            <select>
+                                <option value="none" disabled>Move to...</option>
+                                {shelves.map((shelf) => (
+                                    <option value={shelf.slug} selected={book.shelf === shelf.slug && ("selected")}>
+                                        {shelf.title}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
                     </div>
+
                     <div className="book-title">
                         {book.title}
                     </div>
