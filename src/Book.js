@@ -3,9 +3,23 @@ import React from 'react';
 
 class Book extends React.Component{
 
+    state = {
+        book : {}
+    };
+
+    onChange(book, shelf){
+        book.shelf = shelf;
+        this.props.onBookUpdate(book, shelf);
+    }
+
+    componentWillMount(){
+        this.setState({book: this.props.book});
+    }
+
     render(){
 
-        const {book, shelves} = this.props;
+        const {shelves} = this.props;
+        const {book} = this.state;
 
         return(
             <li>
@@ -17,10 +31,10 @@ class Book extends React.Component{
                     }}>
 
                         <div className="book-shelf-changer">
-                            <select>
-                                <option value="none" disabled>Move to...</option>
+                            <select value={book.shelf} onChange={(e) => this.onChange(this.state.book, e.target.value)}>
+                                <option disabled>Move to...</option>
                                 {shelves.map((shelf) => (
-                                    <option value={shelf.slug} selected={book.shelf === shelf.slug && ("selected")}>
+                                    <option key={shelf.slug} value={shelf.slug}>
                                         {shelf.title}
                                     </option>
                                 ))}
