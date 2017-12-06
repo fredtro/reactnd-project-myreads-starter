@@ -29,7 +29,7 @@ class Book extends React.Component{
                     }}>
 
                         <div className="book-shelf-changer">
-                            <select defaultValue={book.shelf} onChange={(e) => this.onChange(this.state.book, e.target.value)}>
+                            <select value={book.shelf ? book.shelf : 'none' } onChange={(e) => this.onChange(this.state.book, e.target.value)}>
                                 <option disabled>Move to...</option>
                                 {shelves.map((shelf) => (
                                     <option key={shelf.slug} value={shelf.slug}>

@@ -13,6 +13,10 @@ const shelves = [
     {
         title: 'Read',
         slug: 'read'
+    },
+    {
+        title: 'None',
+        slug: 'none'
     }
 ];
 
