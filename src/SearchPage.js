@@ -3,6 +3,9 @@ import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from "./util/BooksAPI";
 
+/**
+ * Represents search view, allowing to search for books by using the BookAsPI
+ */
 class SearchPage extends React.Component{
 
     state = {

@@ -5,6 +5,9 @@ import MainPage from "./MainPage";
 import SearchPage from './SearchPage';
 import * as BooksAPI from "./util/BooksAPI";
 
+/**
+ * My reads application
+ */
 class BooksApp extends React.Component {
 
     state = {

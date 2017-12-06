@@ -1,6 +1,9 @@
 import React from 'react';
 import shelves from './util/Shelves';
 
+/**
+ * single book view, to display a book with controls to move to shelf
+ */
 class Book extends React.Component{
 
     state = {

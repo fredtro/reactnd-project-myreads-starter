@@ -2,6 +2,11 @@ import React from 'react';
 import Book from './Book';
 import sortBy from 'sort-by';
 
+/**
+ * A book shelf as implicit render function
+ *
+ * @param props
+ */
 function Shelf(props)
 {
     const { slug, title } = props;

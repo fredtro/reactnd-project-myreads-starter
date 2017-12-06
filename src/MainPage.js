@@ -3,6 +3,9 @@ import Shelf from "./Shelf"
 import shelves from "./util/Shelves";
 import { Link } from 'react-router-dom';
 
+/**
+ * Represents main page which display books on users shelf
+ */
 class MainPage extends React.Component{
 
     render(){
