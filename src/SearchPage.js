@@ -17,7 +17,6 @@ class SearchPage extends React.Component{
         )
     }
 
-
     render(){
 
         const books = this.state.books;
@@ -43,7 +42,11 @@ class SearchPage extends React.Component{
                     <ol className="books-grid">
                         {books.length > 0 && (
                             books.map((book) => (
-                                <Book key={book.id} book={book}  />
+                                <Book
+                                    key={book.id}
+                                    book={book}
+                                    onBookUpdate={(book, shelf) => this.props.updateBook(book, shelf)}
+                                />
                             ))
                         )}
                     </ol>

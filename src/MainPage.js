@@ -6,23 +6,6 @@ import { Link } from 'react-router-dom';
 
 class MainPage extends React.Component{
 
-    state = {
-        books: []
-    };
-
-    updateBook(book, shelf){
-        BooksAPI.update(book, shelf);
-        this.setState({});
-    }
-
-    componentDidMount() {
-        BooksAPI.getAll().then((books) => {
-            this.setState({
-                books: books
-            });
-        })
-    }
-
     render(){
         return (
             <div className="list-books">
@@ -30,13 +13,15 @@ class MainPage extends React.Component{
                     <h1>My Reads</h1>
                 </div>
 
-                {shelves.map((shelf) =>
+                {shelves
+                    .filter((shelf) => (shelf.slug !== 'none'))
+                    .map((shelf) =>
                     <Shelf
                         key={shelf.slug}
                         slug={shelf.slug}
                         title={shelf.title}
-                        books={this.state.books.filter((book) => book.shelf === shelf.slug)}
-                        onBookUpdate={(book, shelf) => this.updateBook(book, shelf)}
+                        books={this.props.books.filter((book) => book.shelf === shelf.slug)}
+                        onBookUpdate={(book, shelf) => this.props.updateBook(book, shelf)}
                     />
                 )}
 
