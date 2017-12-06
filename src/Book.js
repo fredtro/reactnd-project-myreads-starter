@@ -1,5 +1,5 @@
 import React from 'react';
-
+import shelves from './util/Shelves';
 
 class Book extends React.Component{
 
@@ -17,8 +17,6 @@ class Book extends React.Component{
     }
 
     render(){
-
-        const {shelves} = this.props;
         const {book} = this.state;
 
         return(

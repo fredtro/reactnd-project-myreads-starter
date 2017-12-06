@@ -1,8 +1,8 @@
 import React from 'react'
 import * as BooksAPI from './util/BooksAPI'
 import './App.css'
-import './BookList'
-import BookList from "./BookList"
+import Shelf from "./Shelf"
+import shelves from "./util/Shelves";
 
 class BooksApp extends React.Component {
 
@@ -24,8 +24,23 @@ class BooksApp extends React.Component {
     }
 
     render() {
+
       return(<div className="app">
-        <BookList books={this.state.books} onBookUpdate={(book, shelf) => this.updateBook(book, shelf)}/>
+          <div className="list-books">
+              <div className="list-books-title">
+                  <h1>My Reads</h1>
+              </div>
+
+              {shelves.map((shelf) =>
+                  <Shelf
+                      key={shelf.slug}
+                      slug={shelf.slug}
+                      title={shelf.title}
+                      books={this.state.books.filter((book) => book.shelf === shelf.slug)}
+                      onBookUpdate={(book, shelf) => this.updateBook(book, shelf)}
+                  />
+              )}
+          </div>
       </div>)
     }
 }
