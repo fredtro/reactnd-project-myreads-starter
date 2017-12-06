@@ -29,7 +29,7 @@ class Book extends React.Component{
                     }}>
 
                         <div className="book-shelf-changer">
-                            <select value={book.shelf} onChange={(e) => this.onChange(this.state.book, e.target.value)}>
+                            <select defaultValue={book.shelf} onChange={(e) => this.onChange(this.state.book, e.target.value)}>
                                 <option disabled>Move to...</option>
                                 {shelves.map((shelf) => (
                                     <option key={shelf.slug} value={shelf.slug}>
@@ -44,7 +44,9 @@ class Book extends React.Component{
                         {book.title}
                     </div>
                     <div className="book-authors">
-                        {book.authors.pop()}
+                        {book.authors &&(
+                            book.authors.pop()
+                        )}
                     </div>
                 </div>
             </li>
