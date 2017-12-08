@@ -16,17 +16,10 @@ class BooksApp extends React.Component {
 
     updateBook(book, shelf){
         BooksAPI.update(book, shelf);
-
-        if(shelf === 'none'){
-            delete book.shelf;
-        }else{
-
-        }
-
         if(this.state.books.indexOf(book) === -1){
             this.state.books.push(book);
         }
-
+        //update state to re render with new result
         this.setState({});
     }
 
@@ -46,7 +39,7 @@ class BooksApp extends React.Component {
                 <MainPage books={this.state.books} updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
               )} />
               <Route path="/search" render={() => (
-                  <SearchPage updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
+                  <SearchPage booksOnShelf={this.state.books} updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
               )} />
           </div>)
     }

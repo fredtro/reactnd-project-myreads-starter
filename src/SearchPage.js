@@ -14,18 +14,35 @@ class SearchPage extends React.Component{
     };
 
     updateQuery(query){
+        //save query in state for controlled input
         this.setState({query});
-        BooksAPI.search(query, 5).then(
-            (books) => {this.setState({books})}
+
+        //perform book search on api
+        BooksAPI.search(query).then(
+
+            (books) => {this.setState(() => {
+                if(books !== undefined && books.error !== "empty query"){
+                    //take book from shelf if in result
+                    const result = books.map((book) => {
+                        //search for book in books on shelf
+                        const onShelf = this.props.booksOnShelf.find((bookOnShelf) =>{
+                            return bookOnShelf.id === book.id;
+                        });
+
+                        return onShelf !== undefined ? onShelf : book;
+                    });
+
+                    return {books: result};
+                }
+
+                //return empty array to clear out results on error
+                return {books : []};
+            })}
         )
     }
 
     updateBook(book, shelf)
     {
-        //remove book from results
-        this.setState((state) => ({
-            books: state.books.filter((b) => b.id !== book.id)
-        }));
         this.props.updateBook(book, shelf);
     }
 
