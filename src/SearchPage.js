@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from "./util/BooksAPI";
+import Loading from "react-loading-spinner";
 
 /**
  * Represents search view, allowing to search for books by using the BookAsPI
@@ -10,12 +11,13 @@ class SearchPage extends React.Component{
 
     state = {
         query: '',
-        books:[]
+        books:[],
+        loading: false
     };
 
     updateQuery(query){
         //save query in state for controlled input
-        this.setState({query});
+        this.setState({query: query, loading: true});
 
         //perform book search on api
         BooksAPI.search(query).then(
@@ -32,11 +34,11 @@ class SearchPage extends React.Component{
                         return onShelf !== undefined ? onShelf : book;
                     });
 
-                    return {books: result};
+                    return {loading:false, books : result}
                 }
 
                 //return empty array to clear out results on error
-                return {books : []};
+               return {loading:false, books : []}
             })}
         )
     }
@@ -59,17 +61,21 @@ class SearchPage extends React.Component{
                     </div>
                 </div>
                 <div className="search-books-results">
-                    <ol className="books-grid">
+                    <Loading isLoading={this.state.loading} loadingClassName={"LoadingContainer"}>
+                        <ol className="books-grid">
                         {books.length > 0 && (
                             books.map((book) => (
-                                <Book
-                                    key={book.id}
-                                    book={book}
-                                    onBookUpdate={(book, shelf) => this.updateBook(book, shelf)}
-                                />
+                                <li key={book.id}>
+                                    <Book
+                                        key={book.id}
+                                        book={book}
+                                        onBookUpdate={(book, shelf) => this.updateBook(book, shelf)}
+                                    />
+                                </li>
                             ))
                         )}
-                    </ol>
+                        </ol>
+                    </Loading>
                 </div>
             </div>
         )

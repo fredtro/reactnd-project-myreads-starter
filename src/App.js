@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import MainPage from "./MainPage";
 import SearchPage from './SearchPage';
 import * as BooksAPI from "./util/BooksAPI";
+import 'react-loading-spinner/src/css/index.css';
 
 /**
  * My reads application
@@ -42,7 +43,7 @@ class BooksApp extends React.Component {
       return(
           <div className="app">
               <Route path="/" exact render={() => (
-                <MainPage books={this.state.books} updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
+                  <MainPage books={this.state.books} updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
               )} />
               <Route path="/search" render={() => (
                   <SearchPage booksOnShelf={this.state.books} updateBook={(book, shelf) => (this.updateBook(book, shelf))}/>
