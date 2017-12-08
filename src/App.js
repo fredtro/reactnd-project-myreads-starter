@@ -14,6 +14,12 @@ class BooksApp extends React.Component {
         books: []
     };
 
+    /**
+     * handles changing the shelf of a book
+     *
+     * @param book
+     * @param shelf
+     */
     updateBook(book, shelf){
         BooksAPI.update(book, shelf);
         if(this.state.books.indexOf(book) === -1){
