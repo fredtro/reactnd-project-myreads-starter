@@ -7,7 +7,7 @@ import * as BooksAPI from "./util/BooksAPI";
 import 'react-loading-spinner/src/css/index.css';
 
 /**
- * My reads application
+ * @description My reads application
  */
 class BooksApp extends React.Component {
 
@@ -16,7 +16,7 @@ class BooksApp extends React.Component {
     };
 
     /**
-     * handles changing the shelf of a book
+     * @description handles changing the shelf of a book
      *
      * @param book
      * @param shelf
@@ -30,6 +30,9 @@ class BooksApp extends React.Component {
         this.setState({});
     }
 
+    /**
+     * @description fetch books from api in did-mount lifecycle event
+     */
     componentDidMount() {
         BooksAPI.getAll().then((books) => {
             this.setState({
@@ -39,7 +42,6 @@ class BooksApp extends React.Component {
     }
 
     render() {
-
       return(
           <div className="app">
               <Route path="/" exact render={() => (
@@ -52,4 +54,4 @@ class BooksApp extends React.Component {
     }
 }
 
-export default BooksApp
+export default BooksApp;

@@ -10,6 +10,10 @@ class Book extends React.Component{
         book : {}
     };
 
+    /**
+     * @param book
+     * @param shelf
+     */
     onChange(book, shelf){
         book.shelf = shelf;
         this.props.onBookUpdate(book, shelf);
