@@ -21,12 +21,15 @@ class BooksApp extends React.Component {
    * @param shelf
    */
   updateBook(book, shelf) {
-    BooksAPI.update(book, shelf);
-    if (this.state.books.indexOf(book) === -1) {
-      this.state.books.push(book);
+    if (book.shelf !== shelf) {
+      BooksAPI.update(book, shelf).then(() => {
+        book.shelf = shelf;
+
+        this.setState(state => ({
+          books: [...state.books.filter(b => b.id !== book.id), book]
+        }));
+      });
     }
-    //update state to re render with new result
-    this.setState({});
   }
 
   /**
