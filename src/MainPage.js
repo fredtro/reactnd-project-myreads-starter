@@ -6,34 +6,32 @@ import { Link } from 'react-router-dom';
 /**
  * Represents main page which display books on users shelf
  */
-class MainPage extends React.Component {
-  render() {
-    return (
-      <div className="list-books">
-        <div className="list-books-title">
-          <h1>My Reads</h1>
-        </div>
-
-        {shelves
-          .filter(shelf => shelf.slug !== 'none')
-          .map(shelf => (
-            <Shelf
-              key={shelf.slug}
-              slug={shelf.slug}
-              title={shelf.title}
-              books={this.props.books.filter(book => book.shelf === shelf.slug)}
-              onBookUpdate={(book, shelf) => this.props.updateBook(book, shelf)}
-            />
-          ))}
-
-        <div className="open-search">
-          <Link to="/search" className="add-contact">
-            Add a book
-          </Link>
-        </div>
+function MainPage(props) {
+  return (
+    <div className="list-books">
+      <div className="list-books-title">
+        <h1>My Reads</h1>
       </div>
-    );
-  }
+
+      {shelves
+        .filter(shelf => shelf.slug !== 'none')
+        .map(shelf => (
+          <Shelf
+            key={shelf.slug}
+            slug={shelf.slug}
+            title={shelf.title}
+            books={props.books.filter(book => book.shelf === shelf.slug)}
+            onBookUpdate={(book, shelf) => props.updateBook(book, shelf)}
+          />
+        ))}
+
+      <div className="open-search">
+        <Link to="/search" className="add-contact">
+          Add a book
+        </Link>
+      </div>
+    </div>
+  );
 }
 
 export default MainPage;
