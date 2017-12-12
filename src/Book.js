@@ -4,26 +4,9 @@ import shelves from './util/Shelves';
 /**
  * single book view, to display a book with controls to move to shelf
  */
-class Book extends React.Component {
-  state = {
-    book: {}
-  };
+function Book (props) {
 
-  /**
-   * @param book
-   * @param shelf
-   */
-  onChange(book, shelf) {
-    book.shelf = shelf;
-    this.props.onBookUpdate(book, shelf);
-  }
-
-  componentWillMount() {
-    this.setState({ book: this.props.book });
-  }
-
-  render() {
-    const { book } = this.state;
+    const { book } = props;
 
     return (
       <div className="book">
@@ -38,7 +21,7 @@ class Book extends React.Component {
           <div className="book-shelf-changer">
             <select
               value={book.shelf ? book.shelf : 'none'}
-              onChange={e => this.onChange(this.state.book, e.target.value)}
+              onChange={e => props.onBookUpdate(book, e.target.value)}
             >
               <option disabled>Move to...</option>
               {shelves.map(shelf => (
@@ -54,7 +37,6 @@ class Book extends React.Component {
         <div className="book-authors">{book.authors && book.authors.pop()}</div>
       </div>
     );
-  }
 }
 
 export default Book;
