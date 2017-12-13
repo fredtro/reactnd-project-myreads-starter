@@ -4,6 +4,7 @@ import Book from './Book';
 import * as BooksAPI from './util/BooksAPI';
 import Loading from 'react-loading-spinner';
 import _ from 'underscore';
+import PropTypes from 'prop-types';
 
 /**
  * @description Represents search view, allowing to search for books by using the BookAsPI
@@ -18,7 +19,7 @@ class SearchPage extends React.Component {
   /**
    * @constructor
    */
-  constructor (){
+  constructor() {
     super();
     this.performSearch = _.debounce(this.performSearch, 300);
   }
@@ -26,15 +27,15 @@ class SearchPage extends React.Component {
   /**
    * @param query
    */
-  handleChange(query){
+  handleChange(query) {
     //save query in state for controlled input and set in loading state
     this.setState({ query: query, loading: true });
 
     //perform search on throttled method if query is given
-    if(query.trim().length > 0){
+    if (query.trim().length > 0) {
       this.performSearch(query);
-    }else {
-      this.setState({loading: false, books: []});
+    } else {
+      this.setState({ loading: false, books: [] });
     }
   }
 
@@ -113,5 +114,10 @@ class SearchPage extends React.Component {
     );
   }
 }
+
+SearchPage.propTypes = {
+  booksOnShelf: PropTypes.array.isRequired,
+  updateBook: PropTypes.func.isRequired
+};
 
 export default SearchPage;

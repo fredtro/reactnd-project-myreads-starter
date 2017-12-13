@@ -1,5 +1,6 @@
 import React from 'react';
 import shelves from './util/Shelves';
+import PropTypes from 'prop-types';
 
 /**
  * single book view, to display a book with controls to move to shelf
@@ -38,5 +39,9 @@ function Book (props) {
       </div>
     );
 }
+
+Book.propTypes = {
+  book : PropTypes.object.isRequired
+};
 
 export default Book;

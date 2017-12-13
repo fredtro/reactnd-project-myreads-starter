@@ -1,6 +1,7 @@
 import React from 'react';
 import Book from './Book';
 import sortBy from 'sort-by';
+import PropTypes from 'prop-types';
 
 /**
  * A book shelf as implicit render function
@@ -28,5 +29,12 @@ function Shelf(props) {
     </div>
   );
 }
+
+Shelf.propTypes = {
+  slug : PropTypes.string.isRequired,
+  title : PropTypes.string.isRequired,
+  books : PropTypes.array,
+  onBookUpdate : PropTypes.func.isRequired
+};
 
 export default Shelf;

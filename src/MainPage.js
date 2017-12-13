@@ -2,6 +2,7 @@ import React from 'react';
 import Shelf from './Shelf';
 import shelves from './util/Shelves';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 /**
  * Represents main page which display books on users shelf
@@ -33,5 +34,10 @@ function MainPage(props) {
     </div>
   );
 }
+
+MainPage.propTypes = {
+  books: PropTypes.array.isRequired,
+  updateBook: PropTypes.func.isRequired
+};
 
 export default MainPage;
