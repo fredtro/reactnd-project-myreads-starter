@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Book from './Book';
 import * as BooksAPI from './util/BooksAPI';
 import Loading from 'react-loading-spinner';
+import _ from 'underscore';
 
 /**
  * @description Represents search view, allowing to search for books by using the BookAsPI
@@ -15,14 +16,33 @@ class SearchPage extends React.Component {
   };
 
   /**
-   * @description updates search result on query input changes
-   *
+   * @constructor
+   */
+  constructor (){
+    super();
+    this.performSearch = _.debounce(this.performSearch, 300);
+  }
+
+  /**
    * @param query
    */
-  updateQuery(query) {
+  handleChange(query){
     //save query in state for controlled input and set in loading state
     this.setState({ query: query, loading: true });
 
+    //perform search on throttled method if query is given
+    if(query.trim().length > 0){
+      this.performSearch(query);
+    }else {
+      this.setState({loading: false, books: []});
+    }
+  }
+
+  /**
+   * @description perform search on api
+   * @param query
+   */
+  performSearch(query) {
     //perform book search on api
     BooksAPI.search(query).then(books => {
       this.setState(() => {
@@ -62,7 +82,7 @@ class SearchPage extends React.Component {
           <div className="search-books-input-wrapper">
             <input
               type="text"
-              onChange={e => this.updateQuery(e.target.value)}
+              onChange={e => this.handleChange(e.target.value)}
               value={this.state.query}
               placeholder="Search by title or author"
             />
